@@ -210,10 +210,6 @@ INSERT INTO `pruebas` (`tipo`, `resultado`, `fecha_realizacion`, `coste`, `urgen
 
 SET FOREIGN_KEY_CHECKS = 1;
 
--- ---------------------------------------------------------
--- Usuario de la aplicacion
--- '%' para que se pueda conectar desde el contenedor de PHP
--- ---------------------------------------------------------
 CREATE USER IF NOT EXISTS 'vitalia'@'%' IDENTIFIED BY 'Vitalia2026';
 GRANT SELECT, INSERT, UPDATE, DELETE ON `policlinica_vitalia`.* TO 'vitalia'@'%';
 FLUSH PRIVILEGES;

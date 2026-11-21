@@ -1,0 +1,9 @@
+Codigo comentado con IA para la mejora de la visualización.
+
+Docker-compose creado con IA para probarlo en nuestro entorno local.
+
+Archivo alwaysdata.sql cambiado por la IA del archivo backup.sql de phpmyadmin a alwaysdata no eramos capaces de que funcionase con el archivo original
+
+Archivo netlify necesario para el despliegue en netlify.
+
+README creado con la ayuda de https://readme.so/editor.

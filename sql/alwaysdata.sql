@@ -1,6 +1,4 @@
--- Base de datos para alwaysdata (sin CREATE DATABASE ni usuario,
--- porque en alwaysdata la base de datos y el usuario se crean desde el panel)
--- Se importa con: mysql -h mysql-vitaliajs.alwaysdata.net -u vitaliajs_app -p vitaliajs_policlinica < sql/alwaysdata.sql
+
 
 
 
