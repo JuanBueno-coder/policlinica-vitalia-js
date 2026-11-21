@@ -1,0 +1,7 @@
+# Netlify solo sirve el HTML, CSS y JS.
+# Las peticiones a php/ se reenvian a alwaysdata, donde esta el PHP y la base de datos.
+[[redirects]]
+  from = "/php/*"
+  to = "https://vitaliajs.alwaysdata.net/php/:splat"
+  status = 200
+  force = true

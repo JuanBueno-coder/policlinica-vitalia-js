@@ -1,10 +1,18 @@
 <?php
 // Datos de conexion a la base de datos
-// el servidor es "db" porque asi se llama el servicio de mysql en el docker-compose.yml
-$servidor = "db";
-$usuario = "vitalia";
-$password = "Vitalia2026";
-$baseDatos = "policlinica_vitalia";
+// - En docker: el servidor es "db" (el servicio de mysql del docker-compose.yml)
+// - En internet: la base de datos esta en alwaysdata
+if (getenv("ENTORNO") == "docker") {
+    $servidor = "db";
+    $usuario = "vitalia";
+    $password = "Vitalia2026";
+    $baseDatos = "policlinica_vitalia";
+} else {
+    $servidor = "mysql-vitaliajs.alwaysdata.net";
+    $usuario = "vitaliajs_app";
+    $password = "d3UhB%^UlMw1GX";
+    $baseDatos = "vitaliajs_policlinica";
+}
 
 try {
     $conexion = new PDO("mysql:host=$servidor;dbname=$baseDatos;charset=utf8mb4", $usuario, $password);
