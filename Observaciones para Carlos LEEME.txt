@@ -7,3 +7,8 @@ Archivo alwaysdata.sql cambiado por la IA del archivo backup.sql de phpmyadmin a
 Archivo netlify necesario para el despliegue en netlify.
 
 README creado con la ayuda de https://readme.so/editor.
+
+
+https://vitaliajs.netlify.app/
+
+https://admin.alwaysdata.com/
