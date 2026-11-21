@@ -1,0 +1,45 @@
+# Policlinica Vitalia - Gestion (Grupo 5)
+# Para arrancarlo: docker compose up -d --build
+#   - Aplicacion:  http://localhost:8080
+#   - phpMyAdmin:  http://localhost:8081
+
+services:
+
+  # servidor web con PHP y Apache
+  web:
+    build: .
+    container_name: vitalia-web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+
+  # base de datos MySQL
+  db:
+    image: mysql:8.0
+    container_name: vitalia-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      # la primera vez que arranca ejecuta el backup.sql y crea la base de datos
+      - ./sql/backup.sql:/docker-entrypoint-initdb.d/backup.sql
+      - datos_mysql:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_spanish_ci
+
+  # phpMyAdmin para ver las tablas
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: vitalia-phpmyadmin
+    environment:
+      PMA_HOST: db
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+
+volumes:
+  datos_mysql:

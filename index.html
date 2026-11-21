@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitalia - Gestión</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <link href="css/estilos.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Menu de navegacion -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-vitalia">
+    <div class="container">
+      <a class="navbar-brand" href="#" onclick="mostrar('espListado'); listarEspecialidades(); return false;">Policlínica Vitalia · Gestión</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Especialidades</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onclick="mostrar('espAlta'); return false;">Alta</a></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('espBuscar'); return false;">Buscar y modificar</a></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('espBorrar'); return false;">Borrar</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('espListado'); listarEspecialidades(); return false;">Listado</a></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('espFiltro'); return false;">Listado filtrado</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Médicos</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onclick="mostrar('medAlta'); return false;">Alta</a></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('medBuscar'); return false;">Buscar y modificar</a></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('medBorrar'); return false;">Borrar</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('medListado'); listarMedicos(); return false;">Listado</a></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('medFiltro'); return false;">Listado filtrado</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Pacientes</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onclick="mostrar('pacAlta'); return false;">Alta</a></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('pacBuscar'); return false;">Buscar y modificar</a></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('pacBorrar'); return false;">Borrar</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('pacListado'); listarPacientes(); return false;">Listado</a></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('pacFiltro'); return false;">Listado filtrado</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Citas</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onclick="mostrar('citAlta'); return false;">Alta</a></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('citBuscar'); return false;">Buscar y modificar</a></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('citBorrar'); return false;">Borrar</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('citListado'); listarCitas(); return false;">Listado</a></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('citFiltro'); return false;">Listado filtrado</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Pruebas</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onclick="mostrar('pruAlta'); return false;">Alta</a></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('pruBuscar'); return false;">Buscar y modificar</a></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('pruBorrar'); return false;">Borrar</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('pruListado'); listarPruebas(); return false;">Listado</a></li>
+              <li><a class="dropdown-item" href="#" onclick="mostrar('pruFiltro'); return false;">Listado filtrado</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+    <!-- ================= ESPECIALIDADES (Gabriel Vigo Rodríguez) ================= -->
+
+    <div id="espAlta" class="seccion container my-4">
+      <h2>Alta de especialidades</h2>
+      <p class="text-muted">Responsable: Gabriel Vigo Rodríguez</p>
+      <div class="card" style="margin-top: 10px;">
+        <div class="card-body">
+          <form id="formEspAlta" class="row g-3" novalidate>
+            <div class="col-md-6">
+              <label for="espAltaNombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="espAltaNombre" placeholder="Cardiología" maxlength="60" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="espAltaIdPlanta" class="form-label">Planta</label>
+              <select class="form-select" id="espAltaIdPlanta" required>
+                <option value="">Selecciona una opción</option>
+              </select>
+              <div class="invalid-feedback">Elige una opción</div>
+            </div>
+            <div class="col-md-6">
+              <label for="espAltaNumConsultas" class="form-label">Nº de consultas</label>
+              <input type="number" class="form-control" id="espAltaNumConsultas" min="1" max="50" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="espAltaFechaApertura" class="form-label">Fecha de apertura</label>
+              <input type="date" class="form-control" id="espAltaFechaApertura" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check form-switch mt-md-4">
+                <input class="form-check-input" type="checkbox" id="espAltaActiva" checked>
+                <label class="form-check-label" for="espAltaActiva">Activa</label>
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-coral">Guardar</button>
+              <button type="reset" class="btn btn-outline-secondary">Limpiar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="espBuscar" class="seccion container my-4">
+      <h2>Buscar y modificar especialidades</h2>
+      <p class="text-muted">Responsable: Gabriel Vigo Rodríguez</p>
+      <form id="formEspBuscar" class="row g-2 mb-3">
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="espBuscarTexto" placeholder="Nombre de la especialidad" required>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-vitalia">Buscar</button>
+        </div>
+      </form>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover tabla-vitalia">
+            <thead><tr><th>Código</th><th>Nombre</th><th>Planta</th><th>Consultas</th><th>Apertura</th><th>Activa</th><th></th></tr></thead>
+            <tbody id="espTablaBuscar"></tbody>
+          </table>
+        </div>
+
+      <form id="formEspMod" class="card card-body row g-3 d-none mx-0" novalidate>
+        <h4>Modificar especialidad</h4>
+        <input type="hidden" id="espModId">
+            <div class="col-md-6">
+              <label for="espModNombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="espModNombre" placeholder="Cardiología" maxlength="60" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="espModIdPlanta" class="form-label">Planta</label>
+              <select class="form-select" id="espModIdPlanta" required>
+                <option value="">Selecciona una opción</option>
+              </select>
+              <div class="invalid-feedback">Elige una opción</div>
+            </div>
+            <div class="col-md-6">
+              <label for="espModNumConsultas" class="form-label">Nº de consultas</label>
+              <input type="number" class="form-control" id="espModNumConsultas" min="1" max="50" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="espModFechaApertura" class="form-label">Fecha de apertura</label>
+              <input type="date" class="form-control" id="espModFechaApertura" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check form-switch mt-md-4">
+                <input class="form-check-input" type="checkbox" id="espModActiva">
+                <label class="form-check-label" for="espModActiva">Activa</label>
+              </div>
+            </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-coral">Guardar cambios</button>
+          <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('formEspMod').classList.add('d-none')">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="espBorrar" class="seccion container my-4">
+      <h2>Borrar especialidades</h2>
+      <p class="text-muted">Responsable: Gabriel Vigo Rodríguez</p>
+      <div class="row g-3">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Borrar por código</h5>
+                <form id="formEspBorrarId">
+                  <label for="espBorrarId" class="form-label">Especialidad</label>
+                  <select class="form-select mb-3" id="espBorrarId"><option value="">Selecciona una opción</option></select>
+                  <button type="submit" class="btn btn-coral">Borrar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Borrar por nombre exacto</h5>
+                <form id="formEspBorrarAlt">
+                  <label for="espBorrarAlt" class="form-label">Nombre exacto</label>
+                  <input type="text" class="form-control mb-3" id="espBorrarAlt" placeholder="Cardiología">
+                  <button type="submit" class="btn btn-coral">Borrar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div id="espListado" class="seccion container my-4">
+      <h2>Listado de especialidades <span class="badge bg-vitalia" id="espTotal">0</span></h2>
+      <p class="text-muted">Responsable: Gabriel Vigo Rodríguez</p>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover tabla-vitalia">
+            <thead><tr><th>Código</th><th>Nombre</th><th>Planta</th><th>Consultas</th><th>Apertura</th><th>Activa</th></tr></thead>
+            <tbody id="espTablaListado"></tbody>
+          </table>
+        </div>
+    </div>
+
+    <div id="espFiltro" class="seccion container my-4">
+      <h2>Listado filtrado de especialidades</h2>
+      <p class="text-muted">Responsable: Gabriel Vigo Rodríguez</p>
+      <div class="card mb-3">
+        <div class="card-body">
+          <form id="formEspFiltro" class="row g-3">
+          <div class="col-md-4">
+            <label for="espFilId_planta" class="form-label">Planta</label>
+            <select class="form-select" id="espFilId_planta"><option value="">Todos</option></select>
+          </div>
+          <div class="col-md-4">
+            <label for="espFilActiva" class="form-label">Activa</label>
+            <select class="form-select" id="espFilActiva">
+              <option value="">Todos</option>
+              <option value="1">Sí</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="espFilConsultas_min" class="form-label">Consultas mínimas</label>
+            <input type="number" class="form-control" id="espFilConsultas_min" step="0.01">
+          </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-vitalia">Filtrar</button>
+              <button type="reset" class="btn btn-outline-secondary">Quitar filtros</button>
+            </div>
+          </form>
+        </div>
+      </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover tabla-vitalia">
+            <thead><tr><th>Código</th><th>Nombre</th><th>Planta</th><th>Consultas</th><th>Apertura</th><th>Activa</th></tr></thead>
+            <tbody id="espTablaFiltro"></tbody>
+          </table>
+        </div>
+    </div>
+
+    <!-- ================= MEDICOS (Alejandro Gómez Izquierdo) ================= -->
+
+    <div id="medAlta" class="seccion container my-4">
+      <h2>Alta de médicos</h2>
+      <p class="text-muted">Responsable: Alejandro Gómez Izquierdo</p>
+      <div class="card">
+        <div class="card-body">
+          <form id="formMedAlta" class="row g-3" novalidate>
+            <div class="col-md-6">
+              <label for="medAltaNombre" class="form-label">Nombre completo</label>
+              <input type="text" class="form-control" id="medAltaNombre" placeholder="Dra. Elena Martos Ruiz" maxlength="100" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="medAltaNumColegiado" class="form-label">Nº de colegiado</label>
+              <input type="text" class="form-control" id="medAltaNumColegiado" placeholder="41/1234567" maxlength="20" pattern="\d{2}/\d{7}" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="medAltaIdEspecialidad" class="form-label">Especialidad</label>
+              <select class="form-select" id="medAltaIdEspecialidad" required>
+                <option value="">Selecciona una opción</option>
+              </select>
+              <div class="invalid-feedback">Elige una opción</div>
+            </div>
+            <div class="col-md-6">
+              <label for="medAltaTurno" class="form-label">Turno</label>
+              <select class="form-select" id="medAltaTurno" required>
+                <option>Mañana</option>
+                <option>Tarde</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="medAltaAniosExperiencia" class="form-label">Años de experiencia</label>
+              <input type="number" class="form-control" id="medAltaAniosExperiencia" min="0" max="60" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="medAltaFechaAlta" class="form-label">Fecha de alta</label>
+              <input type="date" class="form-control" id="medAltaFechaAlta" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check form-switch mt-md-4">
+                <input class="form-check-input" type="checkbox" id="medAltaEnActivo" checked>
+                <label class="form-check-label" for="medAltaEnActivo">En activo</label>
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-coral">Guardar</button>
+              <button type="reset" class="btn btn-outline-secondary">Limpiar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="medBuscar" class="seccion container my-4">
+      <h2>Buscar y modificar médicos</h2>
+      <p class="text-muted">Responsable: Alejandro Gómez Izquierdo</p>
+      <form id="formMedBuscar" class="row g-2 mb-3">
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="medBuscarTexto" placeholder="Nombre o nº de colegiado" required>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-vitalia">Buscar</button>
+        </div>
+      </form>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover tabla-vitalia">
+            <thead><tr><th>Código</th><th>Nombre</th><th>Nº colegiado</th><th>Especialidad</th><th>Turno</th><th>Años exp.</th><th>Alta</th><th>Activo</th><th></th></tr></thead>
+            <tbody id="medTablaBuscar"></tbody>
+          </table>
+        </div>
+
+      <form id="formMedMod" class="card card-body row g-3 d-none mx-0" novalidate>
+        <h4>Modificar médico</h4>
+        <input type="hidden" id="medModId">
+            <div class="col-md-6">
+              <label for="medModNombre" class="form-label">Nombre completo</label>
+              <input type="text" class="form-control" id="medModNombre" placeholder="Dra. Elena Martos Ruiz" maxlength="100" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="medModNumColegiado" class="form-label">Nº de colegiado</label>
+              <input type="text" class="form-control" id="medModNumColegiado" placeholder="41/1234567" maxlength="20" pattern="\d{2}/\d{7}" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="medModIdEspecialidad" class="form-label">Especialidad</label>
+              <select class="form-select" id="medModIdEspecialidad" required>
+                <option value="">Selecciona una opción</option>
+              </select>
+              <div class="invalid-feedback">Elige una opción</div>
+            </div>
+            <div class="col-md-6">
+              <label for="medModTurno" class="form-label">Turno</label>
+              <select class="form-select" id="medModTurno" required>
+                <option>Mañana</option>
+                <option>Tarde</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="medModAniosExperiencia" class="form-label">Años de experiencia</label>
+              <input type="number" class="form-control" id="medModAniosExperiencia" min="0" max="60" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="medModFechaAlta" class="form-label">Fecha de alta</label>
+              <input type="date" class="form-control" id="medModFechaAlta" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check form-switch mt-md-4">
+                <input class="form-check-input" type="checkbox" id="medModEnActivo">
+                <label class="form-check-label" for="medModEnActivo">En activo</label>
+              </div>
+            </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-coral">Guardar cambios</button>
+          <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('formMedMod').classList.add('d-none')">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="medBorrar" class="seccion container my-4">
+      <h2>Borrar médicos</h2>
+      <p class="text-muted">Responsable: Alejandro Gómez Izquierdo</p>
+      <div class="row g-3">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Borrar por código</h5>
+                <form id="formMedBorrarId">
+                  <label for="medBorrarId" class="form-label">Médico</label>
+                  <select class="form-select mb-3" id="medBorrarId"><option value="">Selecciona una opción</option></select>
+                  <button type="submit" class="btn btn-coral">Borrar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Borrar por nº de colegiado</h5>
+                <form id="formMedBorrarAlt">
+                  <label for="medBorrarAlt" class="form-label">Nº de colegiado</label>
+                  <input type="text" class="form-control mb-3" id="medBorrarAlt" placeholder="41/1234567">
+                  <button type="submit" class="btn btn-coral">Borrar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div id="medListado" class="seccion container my-4">
+      <h2>Listado de médicos <span class="badge bg-vitalia" id="medTotal">0</span></h2>
+      <p class="text-muted">Responsable: Alejandro Gómez Izquierdo</p>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover tabla-vitalia">
+            <thead><tr><th>Código</th><th>Nombre</th><th>Nº colegiado</th><th>Especialidad</th><th>Turno</th><th>Años exp.</th><th>Alta</th><th>Activo</th></tr></thead>
+            <tbody id="medTablaListado"></tbody>
+          </table>
+        </div>
+    </div>
+
+    <div id="medFiltro" class="seccion container my-4">
+      <h2>Listado filtrado de médicos</h2>
+      <p class="text-muted">Responsable: Alejandro Gómez Izquierdo</p>
+      <div class="card mb-3">
+        <div class="card-body">
+          <form id="formMedFiltro" class="row g-3">
+          <div class="col-md-4">
+            <label for="medFilId_especialidad" class="form-label">Especialidad</label>
+            <select class="form-select" id="medFilId_especialidad"><option value="">Todos</option></select>
+          </div>
+          <div class="col-md-4">
+            <label for="medFilTurno" class="form-label">Turno</label>
+            <select class="form-select" id="medFilTurno">
+              <option value="">Todos</option>
+              <option>Mañana</option>
+              <option>Tarde</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="medFilEn_activo" class="form-label">En activo</label>
+            <select class="form-select" id="medFilEn_activo">
+              <option value="">Todos</option>
+              <option value="1">Sí</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="medFilExperiencia_min" class="form-label">Experiencia mínima (años)</label>
+            <input type="number" class="form-control" id="medFilExperiencia_min" step="0.01">
+          </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-vitalia">Filtrar</button>
+              <button type="reset" class="btn btn-outline-secondary">Quitar filtros</button>
+            </div>
+          </form>
+        </div>
+      </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover tabla-vitalia">
+            <thead><tr><th>Código</th><th>Nombre</th><th>Nº colegiado</th><th>Especialidad</th><th>Turno</th><th>Años exp.</th><th>Alta</th><th>Activo</th></tr></thead>
+            <tbody id="medTablaFiltro"></tbody>
+          </table>
+        </div>
+    </div>
+
+    <!-- ================= PACIENTES (David Jiménez Martín) ================= -->
+
+    <div id="pacAlta" class="seccion container my-4">
+      <h2>Alta de pacientes</h2>
+      <p class="text-muted">Responsable: David Jiménez Martín</p>
+      <div class="card">
+        <div class="card-body">
+          <form id="formPacAlta" class="row g-3" novalidate>
+            <div class="col-md-6">
+              <label for="pacAltaNombre" class="form-label">Nombre completo</label>
+              <input type="text" class="form-control" id="pacAltaNombre" placeholder="Ana García López" maxlength="100" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pacAltaDni" class="form-label">DNI</label>
+              <input type="text" class="form-control" id="pacAltaDni" placeholder="12345678Z" maxlength="9" pattern="[0-9]{8}[A-Za-z]" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pacAltaTelefono" class="form-label">Teléfono</label>
+              <input type="text" class="form-control" id="pacAltaTelefono" placeholder="600123456" maxlength="15" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pacAltaIdAseguradora" class="form-label">Aseguradora</label>
+              <select class="form-select" id="pacAltaIdAseguradora" required>
+                <option value="">Selecciona una opción</option>
+              </select>
+              <div class="invalid-feedback">Elige una opción</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pacAltaPesoKg" class="form-label">Peso (kg)</label>
+              <input type="number" class="form-control" id="pacAltaPesoKg" min="1" max="400" step="0.01" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pacAltaFechaNacimiento" class="form-label">Fecha de nacimiento</label>
+              <input type="date" class="form-control" id="pacAltaFechaNacimiento" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check form-switch mt-md-4">
+                <input class="form-check-input" type="checkbox" id="pacAltaRecordatorioSms" checked>
+                <label class="form-check-label" for="pacAltaRecordatorioSms">Recordatorio por SMS</label>
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-coral">Guardar</button>
+              <button type="reset" class="btn btn-outline-secondary">Limpiar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="pacBuscar" class="seccion container my-4">
+      <h2>Buscar y modificar pacientes</h2>
+      <p class="text-muted">Responsable: David Jiménez Martín</p>
+      <form id="formPacBuscar" class="row g-2 mb-3">
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="pacBuscarTexto" placeholder="Nombre o DNI" required>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-vitalia">Buscar</button>
+        </div>
+      </form>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover tabla-vitalia">
+            <thead><tr><th>Código</th><th>Nombre</th><th>DNI</th><th>Teléfono</th><th>Aseguradora</th><th>Peso</th><th>Nacimiento</th><th>SMS</th><th></th></tr></thead>
+            <tbody id="pacTablaBuscar"></tbody>
+          </table>
+        </div>
+
+      <form id="formPacMod" class="card card-body row g-3 d-none mx-0" novalidate>
+        <h4>Modificar paciente</h4>
+        <input type="hidden" id="pacModId">
+            <div class="col-md-6">
+              <label for="pacModNombre" class="form-label">Nombre completo</label>
+              <input type="text" class="form-control" id="pacModNombre" placeholder="Ana García López" maxlength="100" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pacModDni" class="form-label">DNI</label>
+              <input type="text" class="form-control" id="pacModDni" placeholder="12345678Z" maxlength="9" pattern="[0-9]{8}[A-Za-z]" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pacModTelefono" class="form-label">Teléfono</label>
+              <input type="text" class="form-control" id="pacModTelefono" placeholder="600123456" maxlength="15" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pacModIdAseguradora" class="form-label">Aseguradora</label>
+              <select class="form-select" id="pacModIdAseguradora" required>
+                <option value="">Selecciona una opción</option>
+              </select>
+              <div class="invalid-feedback">Elige una opción</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pacModPesoKg" class="form-label">Peso (kg)</label>
+              <input type="number" class="form-control" id="pacModPesoKg" min="1" max="400" step="0.01" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pacModFechaNacimiento" class="form-label">Fecha de nacimiento</label>
+              <input type="date" class="form-control" id="pacModFechaNacimiento" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check form-switch mt-md-4">
+                <input class="form-check-input" type="checkbox" id="pacModRecordatorioSms">
+                <label class="form-check-label" for="pacModRecordatorioSms">Recordatorio por SMS</label>
+              </div>
+            </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-coral">Guardar cambios</button>
+          <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('formPacMod').classList.add('d-none')">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="pacBorrar" class="seccion container my-4">
+      <h2>Borrar pacientes</h2>
+      <p class="text-muted">Responsable: David Jiménez Martín</p>
+      <div class="row g-3">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Borrar por código</h5>
+                <form id="formPacBorrarId">
+                  <label for="pacBorrarId" class="form-label">Paciente</label>
+                  <select class="form-select mb-3" id="pacBorrarId"><option value="">Selecciona una opción</option></select>
+                  <button type="submit" class="btn btn-coral">Borrar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Borrar por dni</h5>
+                <form id="formPacBorrarAlt">
+                  <label for="pacBorrarAlt" class="form-label">DNI</label>
+                  <input type="text" class="form-control mb-3" id="pacBorrarAlt" placeholder="12345678Z">
+                  <button type="submit" class="btn btn-coral">Borrar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div id="pacListado" class="seccion container my-4">
+      <h2>Listado de pacientes <span class="badge bg-vitalia" id="pacTotal">0</span></h2>
+      <p class="text-muted">Responsable: David Jiménez Martín</p>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover tabla-vitalia">
+            <thead><tr><th>Código</th><th>Nombre</th><th>DNI</th><th>Teléfono</th><th>Aseguradora</th><th>Peso</th><th>Nacimiento</th><th>SMS</th></tr></thead>
+            <tbody id="pacTablaListado"></tbody>
+          </table>
+        </div>
+    </div>
+
+    <div id="pacFiltro" class="seccion container my-4">
+      <h2>Listado filtrado de pacientes</h2>
+      <p class="text-muted">Responsable: David Jiménez Martín</p>
+      <div class="card mb-3">
+        <div class="card-body">
+          <form id="formPacFiltro" class="row g-3">
+          <div class="col-md-4">
+            <label for="pacFilId_aseguradora" class="form-label">Aseguradora</label>
+            <select class="form-select" id="pacFilId_aseguradora"><option value="">Todos</option></select>
+          </div>
+          <div class="col-md-4">
+            <label for="pacFilRecordatorio_sms" class="form-label">Recordatorio SMS</label>
+            <select class="form-select" id="pacFilRecordatorio_sms">
+              <option value="">Todos</option>
+              <option value="1">Sí</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="pacFilNacido_desde" class="form-label">Nacido desde</label>
+            <input type="date" class="form-control" id="pacFilNacido_desde">
+          </div>
+          <div class="col-md-4">
+            <label for="pacFilNacido_hasta" class="form-label">Nacido hasta</label>
+            <input type="date" class="form-control" id="pacFilNacido_hasta">
+          </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-vitalia">Filtrar</button>
+              <button type="reset" class="btn btn-outline-secondary">Quitar filtros</button>
+            </div>
+          </form>
+        </div>
+      </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover tabla-vitalia">
+            <thead><tr><th>Código</th><th>Nombre</th><th>DNI</th><th>Teléfono</th><th>Aseguradora</th><th>Peso</th><th>Nacimiento</th><th>SMS</th></tr></thead>
+            <tbody id="pacTablaFiltro"></tbody>
+          </table>
+        </div>
+    </div>
+
+    <!-- ================= CITAS (Juan Antonio Bueno Rodríguez) ================= -->
+
+    <div id="citAlta" class="seccion container my-4">
+      <h2>Alta de citas</h2>
+      <p class="text-muted">Responsable: Juan Antonio Bueno Rodríguez</p>
+      <div class="card">
+        <div class="card-body">
+          <form id="formCitAlta" class="row g-3" novalidate>
+            <div class="col-md-6">
+              <label for="citAltaIdPaciente" class="form-label">Paciente</label>
+              <select class="form-select" id="citAltaIdPaciente" required>
+                <option value="">Selecciona una opción</option>
+              </select>
+              <div class="invalid-feedback">Elige una opción</div>
+            </div>
+            <div class="col-md-6">
+              <label for="citAltaIdMedico" class="form-label">Médico</label>
+              <select class="form-select" id="citAltaIdMedico" required>
+                <option value="">Selecciona una opción</option>
+              </select>
+              <div class="invalid-feedback">Elige una opción</div>
+            </div>
+            <div class="col-md-6">
+              <label for="citAltaFechaHora" class="form-label">Fecha y hora</label>
+              <input type="datetime-local" class="form-control" id="citAltaFechaHora" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="citAltaDuracionMin" class="form-label">Duración (min)</label>
+              <input type="number" class="form-control" id="citAltaDuracionMin" min="5" max="240" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="citAltaMotivo" class="form-label">Motivo</label>
+              <input type="text" class="form-control" id="citAltaMotivo" placeholder="Revisión anual" maxlength="255" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check form-switch mt-md-4">
+                <input class="form-check-input" type="checkbox" id="citAltaAtendida">
+                <label class="form-check-label" for="citAltaAtendida">Atendida</label>
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-coral">Guardar</button>
+              <button type="reset" class="btn btn-outline-secondary">Limpiar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="citBuscar" class="seccion container my-4">
+      <h2>Buscar y modificar citas</h2>
+      <p class="text-muted">Responsable: Juan Antonio Bueno Rodríguez</p>
+      <form id="formCitBuscar" class="row g-2 mb-3">
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="citBuscarTexto" placeholder="Paciente, DNI o motivo" required>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-vitalia">Buscar</button>
+        </div>
+      </form>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover tabla-vitalia">
+            <thead><tr><th>Código</th><th>Fecha y hora</th><th>Paciente</th><th>Médico</th><th>Motivo</th><th>Duración</th><th>Atendida</th><th></th></tr></thead>
+            <tbody id="citTablaBuscar"></tbody>
+          </table>
+        </div>
+
+      <form id="formCitMod" class="card card-body row g-3 d-none mx-0" novalidate>
+        <h4>Modificar cita</h4>
+        <input type="hidden" id="citModId">
+            <div class="col-md-6">
+              <label for="citModIdPaciente" class="form-label">Paciente</label>
+              <select class="form-select" id="citModIdPaciente" required>
+                <option value="">Selecciona una opción</option>
+              </select>
+              <div class="invalid-feedback">Elige una opción</div>
+            </div>
+            <div class="col-md-6">
+              <label for="citModIdMedico" class="form-label">Médico</label>
+              <select class="form-select" id="citModIdMedico" required>
+                <option value="">Selecciona una opción</option>
+              </select>
+              <div class="invalid-feedback">Elige una opción</div>
+            </div>
+            <div class="col-md-6">
+              <label for="citModFechaHora" class="form-label">Fecha y hora</label>
+              <input type="datetime-local" class="form-control" id="citModFechaHora" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="citModDuracionMin" class="form-label">Duración (min)</label>
+              <input type="number" class="form-control" id="citModDuracionMin" min="5" max="240" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="citModMotivo" class="form-label">Motivo</label>
+              <input type="text" class="form-control" id="citModMotivo" placeholder="Revisión anual" maxlength="255" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check form-switch mt-md-4">
+                <input class="form-check-input" type="checkbox" id="citModAtendida">
+                <label class="form-check-label" for="citModAtendida">Atendida</label>
+              </div>
+            </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-coral">Guardar cambios</button>
+          <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('formCitMod').classList.add('d-none')">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="citBorrar" class="seccion container my-4">
+      <h2>Borrar citas</h2>
+      <p class="text-muted">Responsable: Juan Antonio Bueno Rodríguez</p>
+      <div class="row g-3">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Borrar por código</h5>
+                <form id="formCitBorrarId">
+                  <label for="citBorrarId" class="form-label">Cita</label>
+                  <select class="form-select mb-3" id="citBorrarId"><option value="">Selecciona una opción</option></select>
+                  <button type="submit" class="btn btn-coral">Borrar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div id="citListado" class="seccion container my-4">
+      <h2>Listado de citas <span class="badge bg-vitalia" id="citTotal">0</span></h2>
+      <p class="text-muted">Responsable: Juan Antonio Bueno Rodríguez</p>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover tabla-vitalia">
+            <thead><tr><th>Código</th><th>Fecha y hora</th><th>Paciente</th><th>Médico</th><th>Motivo</th><th>Duración</th><th>Atendida</th></tr></thead>
+            <tbody id="citTablaListado"></tbody>
+          </table>
+        </div>
+    </div>
+
+    <div id="citFiltro" class="seccion container my-4">
+      <h2>Listado filtrado de citas</h2>
+      <p class="text-muted">Responsable: Juan Antonio Bueno Rodríguez</p>
+      <div class="card mb-3">
+        <div class="card-body">
+          <form id="formCitFiltro" class="row g-3">
+          <div class="col-md-4">
+            <label for="citFilId_medico" class="form-label">Médico</label>
+            <select class="form-select" id="citFilId_medico"><option value="">Todos</option></select>
+          </div>
+          <div class="col-md-4">
+            <label for="citFilId_paciente" class="form-label">Paciente</label>
+            <select class="form-select" id="citFilId_paciente"><option value="">Todos</option></select>
+          </div>
+          <div class="col-md-4">
+            <label for="citFilAtendida" class="form-label">Atendida</label>
+            <select class="form-select" id="citFilAtendida">
+              <option value="">Todos</option>
+              <option value="1">Sí</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="citFilDesde" class="form-label">Desde</label>
+            <input type="date" class="form-control" id="citFilDesde">
+          </div>
+          <div class="col-md-4">
+            <label for="citFilHasta" class="form-label">Hasta</label>
+            <input type="date" class="form-control" id="citFilHasta">
+          </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-vitalia">Filtrar</button>
+              <button type="reset" class="btn btn-outline-secondary">Quitar filtros</button>
+            </div>
+          </form>
+        </div>
+      </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover tabla-vitalia">
+            <thead><tr><th>Código</th><th>Fecha y hora</th><th>Paciente</th><th>Médico</th><th>Motivo</th><th>Duración</th><th>Atendida</th></tr></thead>
+            <tbody id="citTablaFiltro"></tbody>
+          </table>
+        </div>
+    </div>
+
+    <!-- ================= PRUEBAS (Juan Antonio Bueno Rodríguez) ================= -->
+
+    <div id="pruAlta" class="seccion container my-4">
+      <h2>Alta de pruebas</h2>
+      <p class="text-muted">Responsable: Juan Antonio Bueno Rodríguez</p>
+      <div class="card">
+        <div class="card-body">
+          <form id="formPruAlta" class="row g-3" novalidate>
+            <div class="col-md-6">
+              <label for="pruAltaIdCita" class="form-label">Cita</label>
+              <select class="form-select" id="pruAltaIdCita" required>
+                <option value="">Selecciona una opción</option>
+              </select>
+              <div class="invalid-feedback">Elige una opción</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pruAltaTipo" class="form-label">Tipo de prueba</label>
+              <input type="text" class="form-control" id="pruAltaTipo" placeholder="Analítica de sangre" maxlength="80" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pruAltaFechaRealizacion" class="form-label">Fecha de realización</label>
+              <input type="date" class="form-control" id="pruAltaFechaRealizacion" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pruAltaCoste" class="form-label">Coste (€)</label>
+              <input type="number" class="form-control" id="pruAltaCoste" min="0" max="99999" step="0.01" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pruAltaResultado" class="form-label">Resultado</label>
+              <input type="text" class="form-control" id="pruAltaResultado" placeholder="Pendiente de resultados" maxlength="255" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check form-switch mt-md-4">
+                <input class="form-check-input" type="checkbox" id="pruAltaUrgente">
+                <label class="form-check-label" for="pruAltaUrgente">Urgente</label>
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-coral">Guardar</button>
+              <button type="reset" class="btn btn-outline-secondary">Limpiar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="pruBuscar" class="seccion container my-4">
+      <h2>Buscar y modificar pruebas</h2>
+      <p class="text-muted">Responsable: Juan Antonio Bueno Rodríguez</p>
+      <form id="formPruBuscar" class="row g-2 mb-3">
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="pruBuscarTexto" placeholder="Tipo de prueba o paciente" required>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-vitalia">Buscar</button>
+        </div>
+      </form>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover tabla-vitalia">
+            <thead><tr><th>Código</th><th>Tipo</th><th>Paciente</th><th>Cita</th><th>Fecha</th><th>Coste</th><th>Urgente</th><th>Resultado</th><th></th></tr></thead>
+            <tbody id="pruTablaBuscar"></tbody>
+          </table>
+        </div>
+
+      <form id="formPruMod" class="card card-body row g-3 d-none mx-0" novalidate>
+        <h4>Modificar prueba</h4>
+        <input type="hidden" id="pruModId">
+            <div class="col-md-6">
+              <label for="pruModIdCita" class="form-label">Cita</label>
+              <select class="form-select" id="pruModIdCita" required>
+                <option value="">Selecciona una opción</option>
+              </select>
+              <div class="invalid-feedback">Elige una opción</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pruModTipo" class="form-label">Tipo de prueba</label>
+              <input type="text" class="form-control" id="pruModTipo" placeholder="Analítica de sangre" maxlength="80" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pruModFechaRealizacion" class="form-label">Fecha de realización</label>
+              <input type="date" class="form-control" id="pruModFechaRealizacion" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pruModCoste" class="form-label">Coste (€)</label>
+              <input type="number" class="form-control" id="pruModCoste" min="0" max="99999" step="0.01" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <label for="pruModResultado" class="form-label">Resultado</label>
+              <input type="text" class="form-control" id="pruModResultado" placeholder="Pendiente de resultados" maxlength="255" required>
+              <div class="invalid-feedback">Campo obligatorio o incorrecto</div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check form-switch mt-md-4">
+                <input class="form-check-input" type="checkbox" id="pruModUrgente">
+                <label class="form-check-label" for="pruModUrgente">Urgente</label>
+              </div>
+            </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-coral">Guardar cambios</button>
+          <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('formPruMod').classList.add('d-none')">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="pruBorrar" class="seccion container my-4">
+      <h2>Borrar pruebas</h2>
+      <p class="text-muted">Responsable: Juan Antonio Bueno Rodríguez</p>
+      <div class="row g-3">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Borrar por código</h5>
+                <form id="formPruBorrarId">
+                  <label for="pruBorrarId" class="form-label">Prueba</label>
+                  <select class="form-select mb-3" id="pruBorrarId"><option value="">Selecciona una opción</option></select>
+                  <button type="submit" class="btn btn-coral">Borrar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div id="pruListado" class="seccion container my-4">
+      <h2>Listado de pruebas <span class="badge bg-vitalia" id="pruTotal">0</span></h2>
+      <p class="text-muted">Responsable: Juan Antonio Bueno Rodríguez</p>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover tabla-vitalia">
+            <thead><tr><th>Código</th><th>Tipo</th><th>Paciente</th><th>Cita</th><th>Fecha</th><th>Coste</th><th>Urgente</th><th>Resultado</th></tr></thead>
+            <tbody id="pruTablaListado"></tbody>
+          </table>
+        </div>
+    </div>
+
+    <div id="pruFiltro" class="seccion container my-4">
+      <h2>Listado filtrado de pruebas</h2>
+      <p class="text-muted">Responsable: Juan Antonio Bueno Rodríguez</p>
+      <div class="card mb-3">
+        <div class="card-body">
+          <form id="formPruFiltro" class="row g-3">
+          <div class="col-md-4">
+            <label for="pruFilTipo" class="form-label">Tipo contiene</label>
+            <input type="text" class="form-control" id="pruFilTipo">
+          </div>
+          <div class="col-md-4">
+            <label for="pruFilUrgente" class="form-label">Urgente</label>
+            <select class="form-select" id="pruFilUrgente">
+              <option value="">Todos</option>
+              <option value="1">Sí</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="pruFilCoste_max" class="form-label">Coste máximo (€)</label>
+            <input type="number" class="form-control" id="pruFilCoste_max" step="0.01">
+          </div>
+          <div class="col-md-4">
+            <label for="pruFilDesde" class="form-label">Desde</label>
+            <input type="date" class="form-control" id="pruFilDesde">
+          </div>
+          <div class="col-md-4">
+            <label for="pruFilHasta" class="form-label">Hasta</label>
+            <input type="date" class="form-control" id="pruFilHasta">
+          </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-vitalia">Filtrar</button>
+              <button type="reset" class="btn btn-outline-secondary">Quitar filtros</button>
+            </div>
+          </form>
+        </div>
+      </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover tabla-vitalia">
+            <thead><tr><th>Código</th><th>Tipo</th><th>Paciente</th><th>Cita</th><th>Fecha</th><th>Coste</th><th>Urgente</th><th>Resultado</th></tr></thead>
+            <tbody id="pruTablaFiltro"></tbody>
+          </table>
+        </div>
+    </div>
+
+
+  <!-- Modal para confirmar los borrados -->
+  <div class="modal fade" id="modalBorrar" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmar borrado</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p id="textoBorrar"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-coral" id="btnConfirmarBorrar">Sí, borrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast para los mensajes -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="toast" class="toast text-white border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body" id="toastMensaje"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <footer class="footer-vitalia text-center py-3 mt-5">
+    Policlínica Vitalia · Grupo 5 · Desarrollo de Interfaces 2º DAM
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/objetos.js"></script>
+  <script src="js/ajax.js"></script>
+  <script src="js/codigo.js"></script>
+</body>
+</html>

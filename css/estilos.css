@@ -1,0 +1,91 @@
+/* Estilos propios de la aplicacion de gestion */
+/* Colores de la paleta de Paletton (los mismos que en la web) */
+/* verde azulado: #157A7A  oscuro: #0B5C5C  claro: #D6EFEF */
+/* coral: #F2735A  coral oscuro: #C44B34 */
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: #F6FBFB;
+}
+
+h1, h2, h3, h4, h5, .navbar-brand {
+  font-family: 'Poppins', sans-serif;
+}
+
+h2 {
+  color: #0B5C5C;
+  margin-bottom: 0px;
+}
+
+.navbar-vitalia {
+  background-color: #0B5C5C;
+}
+
+.footer-vitalia {
+  background-color: #043B3B;
+  color: #D6EFEF;
+}
+
+.bg-vitalia {
+  background-color: #157A7A;
+}
+
+.bg-coral {
+  background-color: #C44B34;
+}
+
+.btn-vitalia {
+  background-color: #157A7A;
+  border-color: #157A7A;
+  color: white;
+}
+
+.btn-vitalia:hover {
+  background-color: #0B5C5C;
+  border-color: #0B5C5C;
+  color: white;
+}
+
+.btn-coral {
+  background-color: #C44B34;
+  border-color: #C44B34;
+  color: white;
+}
+
+.btn-coral:hover {
+  background-color: #A63C28;
+  border-color: #A63C28;
+  color: white;
+}
+
+.tabla-vitalia thead th {
+  background-color: #157A7A;
+  color: white;
+}
+
+/* colores del toast */
+.bg-ok {
+  background-color: #157A7A;
+}
+.bg-error {
+  background-color: #C44B34;
+}
+
+.form-check-input:checked {
+  background-color: #157A7A;
+  border-color: #157A7A;
+}
+
+/* las secciones empiezan ocultas, se ven con la funcion mostrar() */
+.seccion {
+  display: none;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.btn-vitalia:hover {
+  background-color: #0B5C5C;
+}
